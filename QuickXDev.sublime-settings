@@ -6,6 +6,11 @@
     "date_format": "%Y-%m-%d %H:%M:%S",
     // i.e. peter or peter (peter@gmail.com)
     "author": "Your Name",
-    // compile_scripts encrypt key,no encrypt when empty
+    
+    //xxtea_chunk  ,xxtea_zip
+    "compile_scripts_type":"xxtea_chunk",  
+    // encrypt sign
+    "compile_scripts_encrypt":"XXTEM",
+    // encrypt key 
     "compile_scripts_key": ""
 }

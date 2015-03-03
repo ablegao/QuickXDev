@@ -362,6 +362,8 @@ class QuickxCompileScriptsCommand(sublime_plugin.WindowCommand):
         settings = helper.loadSettings("QuickXDev")
         self.cmdPath=cmdPath
         self.compile_scripts_key=settings.get("compile_scripts_key", "")
+        self.compile_scripts_encrypt=settings.get("compile_scripts_encrypt" , "")
+        self.compile_scripts_type=settings.get("compile_scripts_type" , "")
         self.window.run_command("hide_panel")
         output="res/game.zip"
         on_done = functools.partial(self.on_done, dirs[0])
@@ -379,9 +381,11 @@ class QuickxCompileScriptsCommand(sublime_plugin.WindowCommand):
         args=[self.cmdPath,"-i",src,"-o",output]
         if self.compile_scripts_key!="":
             args.append("-e")
-            args.append("xxtea_zip")
+            args.append(self.compile_scripts_type)
             args.append("-ek")
             args.append(self.compile_scripts_key)
+            args.append("-es")
+            args.append(self.compile_scripts_encrypt)
         if sublime.platform()=="osx":
             subprocess.Popen(args,cwd=path,env={"luajit":"/usr/local/bin/luajit"})
         elif sublime.platform()=="windows":
